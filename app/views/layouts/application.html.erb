@@ -17,7 +17,6 @@
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
   <!-- Custom styles for this template -->
-  <link href="./css/styles.css" rel="stylesheet" type="text/css">
 
   <!-- Just for debugging purposes. Don't actually copy this line! -->
   <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -45,13 +44,12 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
           <% if signed_in?(:user) %>
-              Signed in as <strong><%= current_user.email %></strong>. Not you?
-              <a data-method='delete' href = "/users/sign_out#delete">
-                <li><button type="submit" class="btn btn-default">Sign out</button></li>
+              Signed in as <strong><%= current_user.email %></strong>. Not you?<a data-method='delete' href = "/users/sign_out#delete">
+                <button type="submit" class="btn btn-default">Sign out</button>
               </a>
           <% else %>
               <strong> Sign in with: </strong>
-              <a href = "auth/twitter">
+              <a href = "auth/twitter" class = "auth_provider">
                 <%= image_tag "twitter_32.png", :size => "32x32", :alt => "Twitter"%>
               </a>
           <% end %>
@@ -60,9 +58,11 @@
   </div>
 </div>
 
-
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<% if notice %>
+    <div class="alert alert-success"><%= notice %></div>
+<% elsif alert%>
+    <div class="alert alert-info"><%= alert %></div>
+<% end %>
 
 <%= yield %>
 
