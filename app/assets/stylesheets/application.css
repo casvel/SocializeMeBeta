@@ -12,10 +12,7 @@
  *
  *= require_tree .
  *= require_self
-<<<<<<< HEAD
- */
-=======
- */
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -34,7 +31,7 @@ body {
 
 body {
     padding: 60px ;
-    position: absolute;
+
 
 }
 
@@ -65,7 +62,7 @@ code {
 
 }
 
-#alert-succes {
-    width: 100vh;
+#alert-success {
+    width: 500px;
 }
->>>>>>> remotes/origin/Edgar
+
