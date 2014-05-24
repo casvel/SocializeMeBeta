@@ -12,4 +12,60 @@
  *
  *= require_tree .
  *= require_self
+<<<<<<< HEAD
  */
+=======
+ */
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+body {
+    /* Margin bottom by footer height */
+    white-space: nowrap;
+}
+
+
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body {
+    padding: 60px ;
+    position: absolute;
+
+}
+
+code {
+    font-size: 80%;
+}
+
+.scrolling-bar {
+    overflow-y: scroll;
+    height: 80vh;
+}
+
+.column {
+    display: inline-block;
+    width: 300px;
+    height: 85vh;
+    padding: 3px 3px 3px 3px;
+    margin-bottom: 0px;
+
+}
+
+
+
+#contenido {
+    /*margin-top: 55px;*/
+    margin-left: 0px;
+    margin-bottom: 0px;
+
+}
+
+#alert-succes {
+    width: 100vh;
+}
+>>>>>>> remotes/origin/Edgar
