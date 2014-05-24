@@ -1,31 +1,39 @@
-<% @tweets.each do |tweet| %>
-    <div class="row">
-      <div class="span4">
-        <p>
-          <%= image_tag(tweet['user']['profile_image_url_https']) %>
-          <strong><%= link_to tweet['user']['screen_name'], "https://twitter.com/#{tweet['user']['screen_name']}" %></strong>
-        </p>
-        <p><%= tweet['text'] %></p>
-      </div>
-    </div>
-<% end %>
-
 <div id="contenido" class="container">
+
+  <!-- Empieza columna -->
   <div class="container column">
-    <div class="colum-header">La Wea del Futuro</div>
+    <ul class="nav nav-pills">
+      <li class="active"><a href="#">Actividades</a></li>
+    </ul>
     <div class="scrolling-bar">
       <ul class="list-group">
-        <li class="media list-group-item ">
-          <a class="pull-left" href="#">
-            <img class="media-object" src="https://pbs.twimg.com/profile_images/3123556037/a0a96501653d288d300dc47a3f514516_normal.jpeg" alt="...">
-          </a>
-          <div class="media-body">
-            <h4 class="media-heading">Media heading</h4>
-            ...
-          </div>
-        </li>
+        <% @tweets.each do |tweet| %>
+            <li class="media list-group-item">
+                <% begin %>
+                  <a class="pull-left" href="#">
+                    <%= image_tag(tweet['user']['profile_image_url_https'] , :class => "media-object") %>
+                  </a>
+                  <div class="media-body con">
+                    <h4 class="media-heading"><%= link_to tweet['user']['screen_name'], "https://twitter.com/#{tweet['user']['screen_name']}" %></h4>
+                    <p class=" list-group-item-text"><%= tweet['text'] %></p>
+                  </div>
+                <% rescue Exception => e %>
+                    <%= tweet %>
+                    <%= e.message %>
+                    <br>
+                    <%= e.backtrace %>
+                    <% next %>
+
+                <% end %>
+            </li>
+
+        <% end %>
       </ul>
     </div>
   </div>
+  <!-- termina columna -->
+
+
+
 
 </div>

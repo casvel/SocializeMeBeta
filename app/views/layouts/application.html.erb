@@ -39,13 +39,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Socialize.me</a>
+      <% if signed_in?(:user)%>
+          <%= link_to "Socializa.me", usuario_home_path, class: "navbar-brand" %>
+      <% else %>
+          <%= link_to "Socializa.me", root_path, class: "navbar-brand" %>
+      <% end %>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
           <% if signed_in?(:user) %>
               Signed in as <strong><%= current_user.email %></strong>. Not you?<a data-method='delete' href = "/users/sign_out#delete">
-                <button type="submit" class="btn btn-default">Sign out</button>
+                <button type="submit" class="btn btn-primary">Sign out</button>
               </a>
           <% else %>
               <strong> Sign in with: </strong>
@@ -60,8 +64,6 @@
 
 <% if notice %>
     <div class="alert alert-success"><%= notice %></div>
-<% elsif alert%>
-    <div class="alert alert-info"><%= alert %></div>
 <% end %>
 
 <%= yield %>

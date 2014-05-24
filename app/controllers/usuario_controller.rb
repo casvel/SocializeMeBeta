@@ -20,7 +20,9 @@ class UsuarioController < ApplicationController
     access_token = prepare_access_token_twitter(auth['token'], auth['secret'])
     # use the access token as an agent to get the home timeline
     response = access_token.request(:get, "https://api.twitter.com/1.1/statuses/home_timeline.json?count=30")
+    #puts( response )
     @tweets  = JSON.parse(response.body)
+
     # render :json => response.body
   end
 

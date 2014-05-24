@@ -19,24 +19,16 @@
 
 body {
     /* Margin bottom by footer height */
+    /*white-space: nowrap;*/
+}
+
+
+#contenido {
     white-space: nowrap;
 }
 
-
-
-
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
-
-body {
-    padding: 60px ;
-    position: absolute;
-
-}
-
-code {
-    font-size: 80%;
+#contenido > * {
+    white-space: normal;
 }
 
 .scrolling-bar {
@@ -44,24 +36,40 @@ code {
     height: 80vh;
 }
 
-.column {
+.container.column {
     display: inline-block;
-    width: 300px;
-    height: 85vh;
     padding: 3px 3px 3px 3px;
-    margin-bottom: 0px;
-
+    width: 60vh;
 }
 
 
 
 #contenido {
     /*margin-top: 55px;*/
-    margin-left: 0px;
-    margin-bottom: 0px;
-
+    margin-left: 0vh;
+    margin-bottom: 0vh;
+    clear: both;
 }
 
-#alert-succes {
-    width: 100vh;
+html {
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+body {
+    padding-top: 60px;
+}
+
+.nav-pills {
+    padding-bottom: 8px;
+}
+
+.list-group-item {
+    padding-bottom: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+}
+
+.navbar-right {
+    padding-top: 8px;
 }
