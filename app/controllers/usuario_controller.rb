@@ -13,15 +13,32 @@ class UsuarioController < ApplicationController
     return access_token
   end
 
-  def index
-    auth = current_user.authentications.where(provider: 'twitter').first
-    # Exchange our oauth_token and oauth_token secret for the AccessToken instance.
-
+  def home_timeline(num, auth)
     access_token = prepare_access_token_twitter(auth['token'], auth['secret'])
     # use the access token as an agent to get the home timeline
-    response = access_token.request(:get, "https://api.twitter.com/1.1/statuses/home_timeline.json?count=30")
-    @tweets  = JSON.parse(response.body)
-    # render :json => response.body
+    response = access_token.request(:get, "https://api.twitter.com/1.1/statuses/home_timeline.json?count=#{num}")
+    tweets  = JSON.parse(response.body)
+    return tweets
+  end
+
+  def user_timeline(screen_name, num, auth)
+    access_token = prepare_access_token_twitter(auth['token'], auth['secret'])
+    # use the access token as an agent to get the home timeline
+
+    if screen_name
+      response = access_token.request(:get, "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{screen_name}&count=#{num}")
+    else
+      response = access_token.request(:get, "https://api.twitter.com/1.1/statuses/user_timeline.json?count=#{num}")
+    end
+
+    tweets  = JSON.parse(response.body)
+    return tweets
+  end
+
+  def index
+    auth = current_user.authentications.where(provider: 'twitter').first
+    @home_tweets = home_timeline(30, auth)
+    @user_tweets = user_timeline(nil, 30, auth)
   end
 
 end

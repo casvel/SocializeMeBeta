@@ -14,7 +14,7 @@ class AuthenticationsController < ApplicationController
 
     if authentication
       flash[:notice] = "Signed in succesfully."
-      sign_in_and_redirect(:usuario, authentication.user)
+      sign_in_and_redirect(:user, authentication.user)
     else
       user = User.new
       user.apply_omniauth(auth)

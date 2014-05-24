@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<% if signed_in?(:usuario) %>
+<% if signed_in?(:user) %>
     Signed in as <strong><%= current_user.email %></strong>. Not you?
     <a data-method='delete' href = "/users/sign_out#delete">
       <button type="submit" class="btn btn-default">Sign out</button>
