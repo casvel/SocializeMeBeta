@@ -1,0 +1,11 @@
+<% @tweets.each do |tweet| %>
+    <div class="row">
+      <div class="span4">
+        <p>
+          <%= image_tag(tweet['user']['profile_image_url_https']) %>
+          <strong><%= link_to tweet['user']['screen_name'], "https://twitter.com/#{tweet['user']['screen_name']}" %></strong>
+        </p>
+        <p><%= tweet['text'] %></p>
+      </div>
+    </div>
+<% end %>
