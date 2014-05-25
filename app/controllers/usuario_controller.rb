@@ -50,6 +50,7 @@ class UsuarioController < ApplicationController
   def user_timeline(screen_name, num, auth)
     access_token = prepare_access_token_twitter(auth['token'], auth['secret'])
     # use the access token as an agent to get the home timeline
+<<<<<<< HEAD
 
     if screen_name
       response = access_token.request(:get, "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=#{screen_name}&count=#{num}")
@@ -65,6 +66,13 @@ class UsuarioController < ApplicationController
     auth = current_user.authentications.where(provider: 'twitter').first
     @home_tweets = home_timeline(30, auth)
     @user_tweets = user_timeline(nil, 30, auth)
+=======
+    response = access_token.request(:get, "https://api.twitter.com/1.1/statuses/home_timeline.json?count=30")
+    #puts( response )
+    @tweets  = JSON.parse(response.body)
+
+    # render :json => response.body
+>>>>>>> remotes/origin/Edgar
   end
 
 end
