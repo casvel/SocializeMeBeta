@@ -1,140 +1,28 @@
-<<<<<<< HEAD
-<strong>Home Timeline</strong>
-
-<% @home_tweets.each do |tweet| %>
-    <div class="row">
-      <div class="span4">
-        <p>
-          <%= image_tag(tweet['user']['profile_image_url_https']) %>
-          <strong><%= link_to tweet['user']['screen_name'], "https://twitter.com/#{tweet['user']['screen_name']}" %></strong>
-        </p>
-        <p>
-          <% i = 0 %>
-          <% pedazo = '' %>
-          <% while i < tweet['text'].length do %>
-              <% if tweet['text'][i] == '#' %>
-                  <% i += 1 %>
-                  <% hash = '' %>
-                  <% while i < tweet['text'].length and tweet['text'][i] != ' ' do %>
-                      <% hash << tweet['text'][i] %>
-                      <% i += 1 %>
-                  <% end %>
-
-                  <%= pedazo %>
-                  <%= link_to '#'+hash, "https://twitter.com/hashtag/#{hash}" %>
-                  <% pedazo = '' %>
-              <% elsif tweet['text'][i] == '@' %>
-                  <% i += 1 %>
-                  <% usr = '' %>
-                  <% while i < tweet['text'].length and tweet['text'][i] != ' ' do %>
-                      <% usr << tweet['text'][i] %>
-                      <% i += 1 %>
-                  <% end %>
-
-                  <%= pedazo %>
-                  <%= link_to '@'+usr, "https://twitter.com/#{usr}" %>
-                  <% pedazo = '' %>
-              <% elsif tweet['text'][i, 4] == 'http' or tweet['text'][i, 5] == 'https' %>
-                  <% link = '' %>
-                  <% while i < tweet['text'].length and tweet['text'][i] != ' ' do %>
-                      <% link << tweet['text'][i] %>
-                      <% i += 1 %>
-                  <% end %>
-
-                  <%= pedazo %>
-                  <%= link_to link, "#{link}" %>
-                  <% pedazo = '' %>
-              <% end %>
-
-
-              <% if i < tweet['text'].length %>
-                  <% pedazo << tweet['text'][i] %>
-                  <% i += 1 %>
-              <% end %>
-          <% end %>
-
-          <% if pedazo != '' %>
-            <%= pedazo %>
-          <% end %>
-        </p>
-      </div>
-    </div>
-<% end %>
-
-<strong>User Timeline</strong>
-
-<% @user_tweets.each do |tweet| %>
-    <div class="row">
-      <div class="span4">
-        <p>
-          <%= image_tag(tweet['user']['profile_image_url_https']) %>
-          <strong><%= link_to tweet['user']['screen_name'], "https://twitter.com/#{tweet['user']['screen_name']}" %></strong>
-        </p>
-        <p>
-          <% i = 0 %>
-          <% pedazo = '' %>
-          <% while i < tweet['text'].length do %>
-              <% if tweet['text'][i] == '#' %>
-                  <% i += 1 %>
-                  <% hash = '' %>
-                  <% while i < tweet['text'].length and tweet['text'][i] != ' ' do %>
-                      <% hash << tweet['text'][i] %>
-                      <% i += 1 %>
-                  <% end %>
-
-                  <%= pedazo %>
-                  <%= link_to '#'+hash, "https://twitter.com/hashtag/#{hash}" %>
-                  <% pedazo = '' %>
-              <% elsif tweet['text'][i] == '@' %>
-                  <% i += 1 %>
-                  <% usr = '' %>
-                  <% while i < tweet['text'].length and tweet['text'][i] != ' ' do %>
-                      <% usr << tweet['text'][i] %>
-                      <% i += 1 %>
-                  <% end %>
-
-                  <%= pedazo %>
-                  <%= link_to '@'+usr, "https://twitter.com/#{usr}" %>
-                  <% pedazo = '' %>
-              <% elsif tweet['text'][i, 4] == 'http' or tweet['text'][i, 5] == 'https' %>
-                  <% link = '' %>
-                  <% while i < tweet['text'].length and tweet['text'][i] != ' ' do %>
-                      <% link << tweet['text'][i] %>
-                      <% i += 1 %>
-                  <% end %>
-
-                  <%= pedazo %>
-                  <%= link_to link, "#{usr}" %>
-                  <% pedazo = '' %>
-              <% end %>
-
-
-              <% if i < tweet['text'].length %>
-                  <% pedazo << tweet['text'][i] %>
-                  <% i += 1 %>
-              <% end %>
-          <% end %>
-
-          <% if pedazo != '' %>
-              <%= pedazo %>
-          <% end %>
-        </p>
-      </div>
-    </div>
-<% end %>
-
-=======
->>>>>>> remotes/origin/Edgar
 <div id="contenido" class="container">
+
+  <!-- Barra de la izquierda -->
+  <div class="btn-group-vertical">
+    <button type="button" class="btn btn-default">
+      <a id = "refresher" href = "/usuario/home">
+      <span class="glyphicon glyphicon-refresh"></span>
+      </a>
+    </button>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      <span class="glyphicon glyphicon-edit"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li> <textarea id = "new_tweet" row="10" cols = "30"> </textarea> </li>
+    </ul>
+  </div>
 
   <!-- Empieza columna -->
   <div class="container column">
-    <ul class="nav nav-pills">
-      <li class="active"><a href="#">Actividades</a></li>
+    <ul class="nav nav-tabs">
+      <li class="active"><a><strong>Home Timeline</strong></a></li>
     </ul>
     <div class="scrolling-bar">
       <ul class="list-group">
-        <% @tweets.each do |tweet| %>
+        <% @home_tweets.each do |tweet| %>
             <li class="media list-group-item">
                 <% begin %>
                   <a class="pull-left" href="#">
@@ -142,7 +30,55 @@
                   </a>
                   <div class="media-body con">
                     <h4 class="media-heading"><%= link_to tweet['user']['screen_name'], "https://twitter.com/#{tweet['user']['screen_name']}" %></h4>
-                    <p class=" list-group-item-text"><%= tweet['text'] %></p>
+                    <p>
+                      <% i = 0 %>
+                      <% pedazo = '' %>
+                      <% while i < tweet['text'].length do %>
+                          <% if tweet['text'][i] == '#' %>
+                              <% i += 1 %>
+                              <% hash = '' %>
+                              <% while i < tweet['text'].length and tweet['text'][i] != ' ' do %>
+                                  <% hash << tweet['text'][i] %>
+                                  <% i += 1 %>
+                              <% end %>
+
+                              <%= pedazo %>
+                              <%= link_to '#'+hash, "https://twitter.com/hashtag/#{hash}" %>
+                              <% pedazo = '' %>
+                          <% elsif tweet['text'][i] == '@' %>
+                              <% i += 1 %>
+                              <% usr = '' %>
+                              <% while i < tweet['text'].length and tweet['text'][i] != ' ' do %>
+                                  <% usr << tweet['text'][i] %>
+                                  <% i += 1 %>
+                              <% end %>
+
+                              <%= pedazo %>
+                              <%= link_to '@'+usr, "https://twitter.com/#{usr}" %>
+                              <% pedazo = '' %>
+                          <% elsif tweet['text'][i, 4] == 'http' or tweet['text'][i, 5] == 'https' %>
+                              <% link = '' %>
+                              <% while i < tweet['text'].length and tweet['text'][i] != ' ' do %>
+                                  <% link << tweet['text'][i] %>
+                                  <% i += 1 %>
+                              <% end %>
+
+                              <%= pedazo %>
+                              <%= link_to link, "#{link}" %>
+                              <% pedazo = '' %>
+                          <% end %>
+
+
+                          <% if i < tweet['text'].length %>
+                              <% pedazo << tweet['text'][i] %>
+                              <% i += 1 %>
+                          <% end %>
+                      <% end %>
+
+                      <% if pedazo != '' %>
+                          <%= pedazo %>
+                      <% end %>
+                    </p>
                   </div>
                 <% rescue Exception => e %>
                     <%= tweet %>
@@ -160,7 +96,86 @@
   </div>
   <!-- termina columna -->
 
+  <!-- Empieza columna -->
+  <div class="container column">
+    <ul class="nav nav-tabs">
+      <li class="active"><a><strong>User Timeline</strong></a></li>
+    </ul>
+    <div class="scrolling-bar">
+      <ul class="list-group">
+        <% @user_tweets.each do |tweet| %>
+            <li class="media list-group-item">
+              <% begin %>
+                  <a class="pull-left" href="#">
+                    <%= image_tag(tweet['user']['profile_image_url_https'] , :class => "media-object") %>
+                  </a>
+                  <div class="media-body con">
+                    <h4 class="media-heading"><%= link_to tweet['user']['screen_name'], "https://twitter.com/#{tweet['user']['screen_name']}" %></h4>
+                    <p>
+                      <% i = 0 %>
+                      <% pedazo = '' %>
+                      <% while i < tweet['text'].length do %>
+                          <% if tweet['text'][i] == '#' %>
+                              <% i += 1 %>
+                              <% hash = '' %>
+                              <% while i < tweet['text'].length and tweet['text'][i] != ' ' do %>
+                                  <% hash << tweet['text'][i] %>
+                                  <% i += 1 %>
+                              <% end %>
 
+                              <%= pedazo %>
+                              <%= link_to '#'+hash, "https://twitter.com/hashtag/#{hash}" %>
+                              <% pedazo = '' %>
+                          <% elsif tweet['text'][i] == '@' %>
+                              <% i += 1 %>
+                              <% usr = '' %>
+                              <% while i < tweet['text'].length and tweet['text'][i] != ' ' do %>
+                                  <% usr << tweet['text'][i] %>
+                                  <% i += 1 %>
+                              <% end %>
+
+                              <%= pedazo %>
+                              <%= link_to '@'+usr, "https://twitter.com/#{usr}" %>
+                              <% pedazo = '' %>
+                          <% elsif tweet['text'][i, 4] == 'http' or tweet['text'][i, 5] == 'https' %>
+                              <% link = '' %>
+                              <% while i < tweet['text'].length and tweet['text'][i] != ' ' do %>
+                                  <% link << tweet['text'][i] %>
+                                  <% i += 1 %>
+                              <% end %>
+
+                              <%= pedazo %>
+                              <%= link_to link, "#{link}" %>
+                              <% pedazo = '' %>
+                          <% end %>
+
+
+                          <% if i < tweet['text'].length %>
+                              <% pedazo << tweet['text'][i] %>
+                              <% i += 1 %>
+                          <% end %>
+                      <% end %>
+
+                      <% if pedazo != '' %>
+                          <%= pedazo %>
+                      <% end %>
+                    </p>
+                  </div>
+              <% rescue Exception => e %>
+                  <%= tweet %>
+                  <%= e.message %>
+                  <br>
+                  <%= e.backtrace %>
+                  <% next %>
+
+              <% end %>
+            </li>
+
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <!-- termina columna -->
 
 
 </div>

@@ -23,30 +23,35 @@ body {
 }
 
 
-<<<<<<< HEAD
-
 
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
 body {
-    padding: 60px ;
+    padding: 60px;
+}
 
-
-=======
 #contenido {
     white-space: nowrap;
->>>>>>> remotes/origin/Edgar
 }
 
 #contenido > * {
     white-space: normal;
 }
 
+.nav-tabs {
+    margin-left: 5px;
+}
+
 .scrolling-bar {
     overflow-y: scroll;
     height: 80vh;
+}
+
+.btn-group-vertical {
+    margin-left: -20px;
+    margin-top: -1045px;
 }
 
 .container.column {
@@ -55,7 +60,13 @@ body {
     width: 60vh;
 }
 
+.dropdown-menu > li{
+    padding: 5px;
+}
 
+#refresher:visited {
+    color: white;
+}
 
 #contenido {
     /*margin-top: 55px;*/
@@ -77,19 +88,20 @@ body {
     padding-bottom: 8px;
 }
 
-.list-group-item {
-    padding-bottom: 4px;
-    padding-right: 4px;
-    padding-top: 4px;
+.list-group-item{
+    margin: 4px
 }
 
-<<<<<<< HEAD
 #alert-success {
     width: 500px;
 }
 
-=======
 .navbar-right {
     padding-top: 8px;
 }
->>>>>>> remotes/origin/Edgar
+
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('/assets/glyphicons-halflings-regular.eot');
+    src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}

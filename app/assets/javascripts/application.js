@@ -17,4 +17,14 @@
 
 $(document).ready(function(){
     $('#myalert').delay(1000).toggle(1000);
+    $('.field_with_errors').removeAttr('class');
+    $('#error_explanation').removeAttr('id');
+
+    $('input[type=submit]').addClass('btn btn-default');
+    $('#user_email').addClass('form-control').width('250px');
+    $('a[href="/users/sign_in"]').toggle(1);
+
+    $('#new_tweet').on('shown.bs.dropdown', function(){
+        $('#new_tweet').fadeOut('slow');
+    });
 });
