@@ -35,8 +35,42 @@ class UsuarioController < ApplicationController
     return tweets
   end
 
+  def send_tweet(texto, auth)
+    access_token = prepare_access_token_twitter(auth['token'], auth['secret'])
+    response = access_token.request(:post, URI.escape("https://api.twitter.com/1.1/statuses/update.json?status=#{texto}"))
+    return response
+  end
+
+  def search_tweets(query, num, auth)
+    access_token = prepare_access_token_twitter(auth['token'], auth['secret'])
+    response = access_token.request(:get, URI.escape("https://api.twitter.com/1.1/search/tweets.json?q=#{query}&count=#{num}"))
+    return response
+  end
+
   def index
     auth = current_user.authentications.where(provider: 'twitter').first
+
+    texto = params[:new_tweet]
+    if texto
+      response = send_tweet(texto, auth)
+      if response.code == '200'
+        flash.now[:notice] = "Your tweet has been send succesfully!"
+      else
+        flash.now[:notice] = "Oops! Something went wrong"
+      end
+    end
+
+
+    query = params[:query]
+    if query
+      response = search_tweets(query, 30, auth)
+      if response.code == '200'
+        @query_tweets = JSON.parse(response.body)
+      else
+        flash.now[:notice] = "Oops! Something went wrong"
+      end
+    end
+
     @home_tweets = home_timeline(30, auth)
     @user_tweets = user_timeline(nil, 30, auth)
   end

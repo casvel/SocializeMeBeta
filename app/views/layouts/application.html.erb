@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,11 +11,6 @@
 
   <title>Socialize.me Beta</title>
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
-  <!-- Custom styles for this template -->
-  <link rel = "stylesheet" href = "http://bootswatch.com/slate/bootstrap.min.css">
   <!-- Just for debugging purposes. Don't actually copy this line! -->
   <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -72,8 +65,28 @@
 
 <%= yield %>
 
+<!-- Jquery -->
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<!-- Bootstrap CDN -->
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/slate/bootstrap.min.css" rel="stylesheet">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<style>
+    .list-group-item{
+        margin: 2px;
+    }
+    a {
+        color: #71C8D8;
+    }
+</style>
+
+
 
 </body>
 </html>

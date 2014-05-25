@@ -1,17 +1,23 @@
+<%= @texto %>
+
 <div id="contenido" class="container">
 
   <!-- Barra de la izquierda -->
   <div class="btn-group-vertical">
-    <button type="button" class="btn btn-default">
-      <a id = "refresher" href = "/usuario/home">
+    <button type="button" class="btn btn-default" onClick = "window.location.href=window.location.protocol + '//' + window.location.host + window.location.pathname">
       <span class="glyphicon glyphicon-refresh"></span>
-      </a>
     </button>
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
       <span class="glyphicon glyphicon-edit"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
-      <li> <textarea id = "new_tweet" row="10" cols = "30"> </textarea> </li>
+      <li>
+        <form id = "mytweetform" name = "mytweetform" method = "get" action = "">
+            <textarea id = "new_tweet" name = "new_tweet" row="40" cols = "30" data-stopPropagation="true"> </textarea>
+            <button id = "cancel_tweet" type = "button" class = "btn btn-default btn-sm"> Cancelar </button>
+            <button type = "submit" class = "btn btn-primary btn-sm"> Enviar </button>
+        </form>
+      </li>
     </ul>
   </div>
 
@@ -23,8 +29,8 @@
     <div class="scrolling-bar">
       <ul class="list-group">
         <% @home_tweets.each do |tweet| %>
-            <li class="media list-group-item">
-                <% begin %>
+            <% begin %>
+                  <li class="media list-group-item">
                   <a class="pull-left" href="#">
                     <%= image_tag(tweet['user']['profile_image_url_https'] , :class => "media-object") %>
                   </a>
@@ -89,7 +95,6 @@
 
                 <% end %>
             </li>
-
         <% end %>
       </ul>
     </div>
@@ -104,14 +109,14 @@
     <div class="scrolling-bar">
       <ul class="list-group">
         <% @user_tweets.each do |tweet| %>
-            <li class="media list-group-item">
+            <li class="media list-group-item active">
               <% begin %>
                   <a class="pull-left" href="#">
                     <%= image_tag(tweet['user']['profile_image_url_https'] , :class => "media-object") %>
                   </a>
                   <div class="media-body con">
                     <h4 class="media-heading"><%= link_to tweet['user']['screen_name'], "https://twitter.com/#{tweet['user']['screen_name']}" %></h4>
-                    <p>
+                    <p id = "mytweet">
                       <% i = 0 %>
                       <% pedazo = '' %>
                       <% while i < tweet['text'].length do %>

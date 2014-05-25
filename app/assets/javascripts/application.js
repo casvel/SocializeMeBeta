@@ -17,14 +17,25 @@
 
 $(document).ready(function(){
     $('#myalert').delay(1000).toggle(1000);
+
     $('.field_with_errors').removeAttr('class');
     $('#error_explanation').removeAttr('id');
-
     $('input[type=submit]').addClass('btn btn-default');
     $('#user_email').addClass('form-control').width('250px');
-    $('a[href="/users/sign_in"]').toggle(1);
+    $('a[href="/users/sign_in"]').hide();
 
-    $('#new_tweet').on('shown.bs.dropdown', function(){
-        $('#new_tweet').fadeOut('slow');
+    var $background;
+    $('.list-group-item').mouseenter(function(){
+        $background = $(this).css("background-color");
+        $(this).css("background-color", "#383f71");
     });
+
+    $('.list-group-item').mouseleave(function(){
+        $(this).css("background-color", $background);
+    });
+
+    $("ul.dropdown-menu").on("click", "[data-stopPropagation]", function(e) {
+        e.stopPropagation();
+    });
+
 });
