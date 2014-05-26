@@ -56,7 +56,7 @@ class UsuarioController < ApplicationController
       if response.code == '200'
         flash.now[:notice] = "Your tweet has been send succesfully!"
       else
-        flash.now[:notice] = "Oops! Something went wrong"
+        flash.now[:alert] = "Oops! Something went wrong"
       end
     end
 
@@ -67,7 +67,7 @@ class UsuarioController < ApplicationController
       if response.code == '200'
         @query_tweets = JSON.parse(response.body)['statuses']
       else
-        flash.now[:notice] = "Oops! Something went wrong"
+        flash.now[:alert] = "Oops! Something went wrong"
       end
     end
 

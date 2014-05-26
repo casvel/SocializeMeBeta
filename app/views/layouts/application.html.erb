@@ -63,6 +63,10 @@
     <div class="alert alert-success" id = "myalert"><%= notice %></div>
 <% end %>
 
+<% if alert %>
+    <div class="alert alert-danger" id = "myalert"><%= alert %></div>
+<% end %>
+
 <%= yield %>
 
 <!-- Jquery -->

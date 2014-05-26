@@ -75,11 +75,6 @@ body {
     clear: both;
 }
 
-html {
-    overflow-y: hidden;
-    overflow-x: scroll;
-}
-
 body {
     padding-top: 60px;
 }
