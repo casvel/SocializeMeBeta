@@ -65,7 +65,7 @@ class UsuarioController < ApplicationController
     if query
       response = search_tweets(query, 30, auth)
       if response.code == '200'
-        @query_tweets = JSON.parse(response.body)
+        @query_tweets = JSON.parse(response.body)['statuses']
       else
         flash.now[:notice] = "Oops! Something went wrong"
       end

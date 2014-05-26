@@ -38,4 +38,22 @@ $(document).ready(function(){
         e.stopPropagation();
     });
 
+    var $color = $('#new_tweet').css("color");;
+    $('#new_tweet').on('focus', function(){
+        $(this).val("");
+        $(this).css("color", "black");
+    });
+
+    $('#cancel_tweet').on('focus', function(){
+       $('#new_tweet').val("ola k ase, tuitiando o k ase");
+       $('#new_tweet').css("color", $color);
+    });
+
+    $('#send_tweet').on('click', function(){
+       if ($('#new_tweet').css("color") == $color)
+       {
+           $('#new_tweet').val("");
+       }
+    });
+
 });
